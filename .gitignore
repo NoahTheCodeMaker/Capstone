@@ -1,4 +1,4 @@
 __pycache__
 myenv
-setup.sh
 migrations
+.env
