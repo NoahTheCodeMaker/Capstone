@@ -35,6 +35,47 @@ def create_app(test_config=None):
             "success": True,
             "payload": payload
         })
+    
+    # Endpoint for viewing actors.
+    @app.route('/actors', methods=['GET'])
+    @requires_auth('read:actors')
+    def actor_view(payload):
+        try:
+            formatted_actors = []
+            actors = Actors.query.all()
+            for actor in actors:
+                formatted_actors.append({
+                    "id": actor.id,
+                    "name": actor.name,
+                    "age": actor.age,
+                    "gender": actor.gender,
+                })
+            return jsonify({
+                "actors": formatted_actors
+            })
+        except:
+            traceback.print_exc()
+            abort(500)
+
+    # Endpoint for viewing movies.
+    @app.route('/movies', methods=['GET'])
+    @requires_auth('read:movies')
+    def movie_view(payload):
+        try:
+            formatted_movies = []
+            movies = Movies.query.all()
+            for movie in movies:
+                formatted_movies.append({
+                    "id": movie.id,
+                    "title": movie.title,
+                    "release_date": movie.release_date
+                })
+            return jsonify({
+                "movies": formatted_movies
+            })
+        except:
+            traceback.print_exc()
+            abort(500)
 
     # Error handlers
 
