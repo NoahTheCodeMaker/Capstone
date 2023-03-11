@@ -123,6 +123,50 @@ def create_app(test_config=None):
             traceback.print_exc()
             abort(422)
 
+    # Endpoint for editing actors
+    @app.route('/actors', methods=['PATCH'])
+    @requires_auth('edit:actors')
+    def edit_actor(payload):
+        try:
+            actor_id = request.get_json().get("id", None)
+            name = request.get_json().get("name", None)
+            age = request.get_json().get("age", None)
+            gender = request.get_json().get("gender", None)
+            edited_actor = Actors.query.get(actor_id)
+            edited_actor.name = name
+            edited_actor.age = age
+            edited_actor.gender = gender
+            db.session.commit()
+            return jsonify({
+                "success": True,
+                "actor": edited_actor.format()
+            })
+        except:
+            db.session.rollback()
+            traceback.print_exc()
+            abort(422)
+
+    # Endpoint for editing movies
+    @app.route('/movies', methods=['PATCH'])
+    @requires_auth('edit:movies')
+    def edit_movie(payload):
+        try:
+            movie_id = request.get_json().get("id", None)
+            title = request.get_json().get("title", None)
+            release_date = request.get_json().get("release_date", None)
+            edited_movie = Movies.query.get(movie_id)
+            edited_movie.title = title
+            edited_movie.release_date = release_date
+            db.session.commit()
+            return jsonify({
+                "success": True,
+                "actor": edited_movie.format()
+            })
+        except:
+            db.session.rollback()
+            traceback.print_exc()
+            abort(422)
+
     # Error handlers
 
     @app.errorhandler(400)
