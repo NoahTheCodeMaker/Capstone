@@ -62,6 +62,7 @@ class Actors(db.Model):
   def format(self):
     return {
       'id': self.id,
+      'name': self.name,
       'age': self.age,
       'gender': self.gender
     }
