@@ -77,6 +77,52 @@ def create_app(test_config=None):
             traceback.print_exc()
             abort(500)
 
+    # Endpoint for creating actors
+    @app.route('/actors', methods=['POST'])
+    @requires_auth('create:actors')
+    def create_actor(payload):
+        try:
+            name = request.get_json().get("name", None)
+            age = request.get_json().get("age", None)
+            gender = request.get_json().get("gender", None)
+            new_actor = Actors(
+                name=name,
+                age=age,
+                gender=gender
+            )
+            db.session.add(new_actor)
+            db.session.commit()
+            return jsonify({
+                "success": True,
+                "actor": new_actor.format()
+            })
+        except:
+            db.session.rollback()
+            traceback.print_exc()
+            abort(422)
+
+     # Endpoint for creating movies
+    @app.route('/movies', methods=['POST'])
+    @requires_auth('create:movies')
+    def create_movie(payload):
+        try:
+            title = request.get_json().get("title", None)
+            release_date = request.get_json().get("release_date", None)
+            new_movie = Movies(
+                title=title,
+                release_date=release_date
+            )
+            db.session.add(new_movie)
+            db.session.commit()
+            return jsonify({
+                "success": True,
+                "actor": new_movie.format()
+            })
+        except:
+            db.session.rollback()
+            traceback.print_exc()
+            abort(422)
+
     # Error handlers
 
     @app.errorhandler(400)
