@@ -13,14 +13,19 @@ def create_app(test_config=None):
     CORS(app)
 
     # Route that works for anyone with the link
-    @app.route('/')
+    @app.route('/', methods=['GET'])
     def capstone_intro():
-        return jsonify({
+        try:
+            return jsonify({
+            "success": True,
             "message": "Welcome to my Capstone Project! Please navigate to /login to log into an account!"
         })
+        except:
+            traceback.print_exc()
+            abort(500)
     
     # Login route that works for anyone with the link
-    @app.route('/login')
+    @app.route('/login', methods=['GET'])
     def login():
         return(redirect(location=LOGIN_LINK))
 
@@ -28,7 +33,7 @@ def create_app(test_config=None):
     # if the login worked with your own jwt,
     # but the rest of the endpoints need my 
     # custom roles on the tokens provided
-    @app.route('/auth')
+    @app.route('/auth', methods=['GET'])
     @requires_auth("")
     def authorize(payload):
         return jsonify({
@@ -51,6 +56,7 @@ def create_app(test_config=None):
                     "gender": actor.gender,
                 })
             return jsonify({
+                "success": True,
                 "actors": formatted_actors
             })
         except:
@@ -71,6 +77,7 @@ def create_app(test_config=None):
                     "release_date": movie.release_date
                 })
             return jsonify({
+                "success": True,
                 "movies": formatted_movies
             })
         except:
