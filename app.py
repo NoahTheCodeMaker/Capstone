@@ -101,7 +101,7 @@ def create_app(test_config=None):
             traceback.print_exc()
             abort(422)
 
-     # Endpoint for creating movies
+    # Endpoint for creating movies
     @app.route('/movies', methods=['POST'])
     @requires_auth('create:movies')
     def create_movie(payload):
@@ -166,6 +166,40 @@ def create_app(test_config=None):
             db.session.rollback()
             traceback.print_exc()
             abort(422)
+
+    # Endpoint for deleting actors
+    @app.route('/actors', methods=['DELETE'])
+    @requires_auth('delete:actors')
+    def delete_actor(payload):
+        try:
+            actor_id = request.get_json().get("id", None)
+            Actors.query.filter_by(id=actor_id).delete()
+            db.session.commit()
+            return jsonify({
+                "success": True,
+                "deleted_actor_id": actor_id
+            })
+        except:
+            db.session.rollback()
+        finally:
+            db.session.close()
+
+    # Endpoint for deleting movies
+    @app.route('/movies', methods=['DELETE'])
+    @requires_auth('delete:movies')
+    def delete_movie(payload):
+        try:
+            movie_id = request.get_json().get("id", None)
+            Movies.query.filter_by(id=movie_id).delete()
+            db.session.commit()
+            return jsonify({
+                "success": True,
+                "deleted_movie_id": movie_id
+            })
+        except:
+            db.session.rollback()
+        finally:
+            db.session.close()
 
     # Error handlers
 
