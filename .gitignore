@@ -2,3 +2,6 @@ __pycache__
 myenv
 migrations
 .env
+tokens.py
+test.sh
+database_starter.psql
