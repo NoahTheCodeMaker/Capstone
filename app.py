@@ -123,7 +123,7 @@ def create_app(test_config=None):
             db.session.commit()
             return jsonify({
                 "success": True,
-                "actor": new_movie.format()
+                "movie": new_movie.format()
             })
         except:
             db.session.rollback()
@@ -167,7 +167,7 @@ def create_app(test_config=None):
             db.session.commit()
             return jsonify({
                 "success": True,
-                "actor": edited_movie.format()
+                "movie": edited_movie.format()
             })
         except:
             db.session.rollback()
@@ -187,7 +187,9 @@ def create_app(test_config=None):
                 "deleted_actor_id": actor_id
             })
         except:
+            traceback.print_exc()
             db.session.rollback()
+            abort(404)
         finally:
             db.session.close()
 
@@ -204,9 +206,28 @@ def create_app(test_config=None):
                 "deleted_movie_id": movie_id
             })
         except:
+            traceback.print_exc()
             db.session.rollback()
+            abort(404)
         finally:
             db.session.close()
+
+    # Forcing errors for error tests
+
+    @app.route('/400errortest', methods=['GET'])
+    def test400():
+        if request.method == 'GET':
+            abort(400)
+
+    @app.route('/422errortest', methods=['GET'])
+    def test422():
+        if request.method == 'GET':
+            abort(422)
+
+    @app.route('/500errortest', methods=['GET'])
+    def test500():
+        if request.method == 'GET':
+            abort(500)
 
     # Error handlers
 
