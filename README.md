@@ -2,8 +2,13 @@
 
 ## Motivation for this project
 ```
-As I went with the standard Udacity outline for this project, you may think that I was not feeling very motivated for this project.
-I assure you that this is not the case! I started this Udacity nanodegree program just before going back to school for my final semester to get my degree in Science, Technology, and Mathematics with studies in Computer Science. Because of this, I fell behind in the course, and was always bothered by the slow pace that I was going. As I now have my degree, I wanted to get this project done as soon as possible (also because this is also an expensive course to be activity enrolled in), and I actually completed this project in only 3 days, my shortest time taken on a project yet!
+As I went with the standard Udacity outline for this project, you may think that I was not feeling very 
+motivated for this project.I assure you that this is not the case! I started this Udacity nanodegree 
+program just before going back to school for my final semester to get my degree in Science, Technology, 
+and Mathematics with studies in Computer Science. Because of this, I fell behind in the course, and was 
+always bothered by the slow pace that I was going. As I now have my degree, I wanted to get this project 
+done as soon as possible (also because this is also an expensive course to be activity enrolled in), 
+and I actually completed this project in only 3 days, my shortest time taken on a project yet!
 ```
 ## See the Getting Started section of the API Documentation for the Hosted URL of my API!
 
@@ -17,18 +22,24 @@ This web app uses Gunicorn to run in production.
 
 ## Running Locally
 ```
-  To run this project on your machine, you will need to use the command "source setup.sh" after uncommenting all of the local environment variables, as these are needed to run.
-  After running this command, the dependencies will be installed, the environment variables will be set, and the database will be completely set up (under the default postgres database).
+  To run this project on your machine, you will need to use the command "source setup.sh" 
+  after uncommenting all of the local environment variables, as these are needed to run.
+  After running this command, the dependencies will be installed, the environment variables 
+  will be set, and the database will be completely set up (under the default postgres database).
   Then, all you have to do is use the command "flask run" and the API will be up and ready!
 ```
 ## Hosting Instructions
 ```
-I am having this app hosted by render cloud platform as of writing. Just setting the "source setup.sh" command without uncommenting the local environment variables and setting the proper environment variables in the app settings is all that needs to be done for this app to be hosted on render!
+I am having this app hosted by render cloud platform as of writing. Just setting the "source setup.sh" 
+command without uncommenting the local environment variables and setting the proper environment variables 
+in the app settings is all that needs to be done for this app to be hosted on render!
 ```
 
 ## Testing
 ```
-To make the testing very easy, I created a script - test.sh - for the Udacity reviewers. This script fully sets up the database under the default postgres user with some starter information. Then, it automatically runs all of the tests. (For the Udacity Reviewers) See this script for more information.
+To make the testing very easy, I created a script - test.sh - for the Udacity reviewers. This script 
+fully sets up the database under the default postgres user with some starter information. Then, 
+it automatically runs all of the tests. (For the Udacity Reviewers) See this script for more information.
 ```
 
 ## API Documentation
@@ -47,8 +58,9 @@ There are no API Keys, but there is Authentication by Auth0. See the below descr
 ```
 # Authentication
 ```
-    I created a /login endpoint and a /auth endpoint for anybody who wants to attempt a login and use the JWT received by /login by sending it to 
-    the /auth endpoint which will only work if your user is valid and will send back the payload of the JWT. This endpoint expects an Authorization
+    I created a /login endpoint and a /auth endpoint for anybody who wants to attempt a login and use the 
+    JWT received by /login by sending it to the /auth endpoint which will only work if your user is valid 
+    and will send back the payload of the JWT. This endpoint expects an Authorization
     header with a bearer token containing a valid JWT, no permissions are needed for this endpoint.
 
     Here are the roles describing permissions for this API:
@@ -63,7 +75,8 @@ There are no API Keys, but there is Authentication by Auth0. See the below descr
       All permissions a Casting Director has and…
       Add or delete a movie from the database
 
-    For Udacity Reviewers, I have included the tokens.py file with the following JWT tokens for usage in testing, which you can also use (for as long as they are valid).
+    For Udacity Reviewers, I have included the tokens.py file with the following JWT tokens for usage in testing, 
+    which you can also use (for as long as they are valid).
         An EXPIRED_TOKEN for testing failure.
         A CASTING_ASSISTANT_TOKEN for testing the casting assistant role.
         A CASTING_DIRECTOR_TOKEN for testing the casting director role.
@@ -123,7 +136,8 @@ See the example below for an example of this.
 ```
 # API Resource Endpoint Library
 ```
-I will be using the hosted API URL for the examples, but if running locally, you can switch out the hosted URL for http://127.0.0.1:5000
+I will be using the hosted API URL for the examples, 
+but if running locally, you can switch out the hosted URL for http://127.0.0.1:5000
 ```
 ```
 All Endpoints
