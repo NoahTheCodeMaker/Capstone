@@ -1,96 +1,101 @@
-## This is a Repository for the Udacity FSND Capstone Project
+# This is a Repository for the Udacity FSND Capstone Project
+
+## ^^ Which I passed with flying colors on my first attempt!
 
 ## Motivation for this project
-```
-As I went with the standard Udacity outline for this project, you may think that I was not feeling very 
-motivated for this project.I assure you that this is not the case! I started this Udacity nanodegree 
-program just before going back to school for my final semester to get my degree in Science, Technology, 
-and Mathematics with studies in Computer Science. Because of this, I fell behind in the course, and was 
-always bothered by the slow pace that I was going. As I now have my degree, I wanted to get this project 
-done as soon as possible (also because this is also an expensive course to be activity enrolled in), 
-and I actually completed this project in only 3 days, my shortest time taken on a project yet!
-```
-## See the Getting Started section of the API Documentation for the Hosted URL of my API!
+
+  As I went with the standard Udacity outline for this project, you may think that I was not feeling very 
+  motivated for this project.I assure you that this is not the case! I started this Udacity nanodegree 
+  program just before going back to school for my final semester to get my degree in Science, Technology, 
+  and Mathematics with studies in Computer Science. Because of this, I fell behind in the course, and was 
+  always bothered by the slow pace that I was going. As I now have my degree, I wanted to get this project 
+  done as soon as possible (also because this is also an expensive course to be activity enrolled in), 
+  and I actually completed this project in only 3 days, my shortest time taken on a project yet!
+
+### See the Getting Started section of the API Documentation for the Hosted URL of my API!
 
 ## Dependencies
-```
-This API is run with Flask and Flask-SQLAlchemy. 
-It uses Postgresql and psycopg2 for the database and database interactions.
-The Authorization is handled by Auth0 and with the python-jose library for decoding JWTs
-This web app uses Gunicorn to run in production.
-```
+
+  This API is run with Flask and Flask-SQLAlchemy. 
+  It uses Postgresql and psycopg2 for the database and database interactions.
+  The Authorization is handled by Auth0 and with the python-jose library for decoding JWTs
+  This web app uses Gunicorn to run in production.
+
 
 ## Running Locally
-```
+
   To run this project on your machine, you will need to use the command "source setup.sh" 
   after uncommenting all of the local environment variables, as these are needed to run.
   After running this command, the dependencies will be installed, the environment variables 
   will be set, and the database will be completely set up (under the default postgres database).
   Then, all you have to do is use the command "flask run" and the API will be up and ready!
-```
+
 ## Hosting Instructions
-```
-I am having this app hosted by render cloud platform as of writing. Just setting the "source setup.sh" 
-command without uncommenting the local environment variables and setting the proper environment variables 
-in the app settings is all that needs to be done for this app to be hosted on render!
-```
+
+  I am having this app hosted by render cloud platform as of writing. Just setting the "source setup.sh" 
+  command without uncommenting the local environment variables and setting the proper environment variables 
+  in the app settings is all that needs to be done for this app to be hosted on render!
+
 
 ## Testing
-```
-To make the testing very easy, I created a script - test.sh - for the Udacity reviewers. This script 
-fully sets up the database under the default postgres user with some starter information. Then, 
-it automatically runs all of the tests. (For the Udacity Reviewers) See this script for more information.
-```
 
-## API Documentation
+  To make the testing very easy, I created a script - test.sh - for the Udacity reviewers. This script 
+  fully sets up the database under the default postgres user with some starter information. Then, 
+  it automatically runs all of the tests. (For the Udacity Reviewers) See this script for more information.
 
-# API Introduction
-```
-This project is for a Casting Agency conveniently called noahdragoonudacitycapstone. The API in this project is 
-responsible for creating movies and managing and assigning actors to those movies. This project streamlines this process.
+# API Documentation
 
-```
-# Getting Started
-```
-This API is hosted by the render cloud platform at https://noahdragoonudacitycapstone.onrender.com/
+## API Introduction
 
-There are no API Keys, but there is Authentication by Auth0. See the below description for this. 
-```
-# Authentication
-```
-    I created a /login endpoint and a /auth endpoint for anybody who wants to attempt a login and use the 
-    JWT received by /login by sending it to the /auth endpoint which will only work if your user is valid 
-    and will send back the payload of the JWT. This endpoint expects an Authorization
-    header with a bearer token containing a valid JWT, no permissions are needed for this endpoint.
+  This project is for a Casting Agency conveniently called noahdragoonudacitycapstone. The API in this project is 
+  responsible for creating movies and managing and assigning actors to those movies. This project streamlines this process.
 
-    Here are the roles describing permissions for this API:
-    Roles:
-    Casting Assistant
-      Can view actors and movies
-    Casting Director
-      All permissions a Casting Assistant has and…
-      Add or delete an actor from the database
-      Modify actors or movies
-    Executive Producer
-      All permissions a Casting Director has and…
-      Add or delete a movie from the database
+## Getting Started
 
-    For Udacity Reviewers, I have included the tokens.py file with the following JWT tokens for usage in testing, 
-    which you can also use (for as long as they are valid).
-        An EXPIRED_TOKEN for testing failure.
-        A CASTING_ASSISTANT_TOKEN for testing the casting assistant role.
-        A CASTING_DIRECTOR_TOKEN for testing the casting director role.
-        An EXECUTIVE_PRODUCER_TOKEN for testing the executive producer role.
+  This API is hosted by the render cloud platform at https://noahdragoonudacitycapstone.onrender.com/
 
-    Without this file, the test_app will fail the RBAC tests, which most tests are.
+  There are no API Keys, but there is Authentication by Auth0. See the below description for this. 
 
-    See the request arguments in the API Resource Endpoint Library to see what endpoints require which permissions.
-```
-# Error Messages
-```
+## Authentication
+
+  I created a /login endpoint and a /auth endpoint for anybody who wants to attempt a login and use the 
+  JWT received by /login by sending it to the /auth endpoint which will only work if your user is valid 
+  and will send back the payload of the JWT. This endpoint expects an Authorization
+  header with a bearer token containing a valid JWT, no permissions are needed for this endpoint.
+
+  Here are the roles describing permissions for this API
+  ```
+  Roles:
+  Casting Assistant
+    Can view actors and movies
+  Casting Director
+    All permissions a Casting Assistant has and…
+    Add or delete an actor from the database
+    Modify actors or movies
+  Executive Producer
+    All permissions a Casting Director has and…
+    Add or delete a movie from the database
+  ```
+
+  For Udacity Reviewers, I have included the tokens.py file with the following JWT tokens for usage in testing, 
+  which you can also use (for as long as they are valid).
+
+  ```
+  An EXPIRED_TOKEN for testing failure.
+  A CASTING_ASSISTANT_TOKEN for testing the casting assistant role.
+  A CASTING_DIRECTOR_TOKEN for testing the casting director role.
+  An EXECUTIVE_PRODUCER_TOKEN for testing the executive producer role.
+  ```
+
+  Without this file, the test_app will fail the RBAC tests, which most tests are.
+
+  See the request arguments in the API Resource Endpoint Library to see what endpoints require which permissions.
+
+## Error Messages
+
 The error codes 400, 404, 405, 422, and 500 are the error codes most expected to occur in this app.
 Keeping this in mind, here are the returned json responses for each code so you can expect them.
-```
+
 ```
 Response for Error Code 400
 {
@@ -122,9 +127,13 @@ Response for Error Code 500
   "error": 500,
   "message": "internal server error"
 }
-If the error is because of Authentication problems, the json responses will have an object with 
-"code" and "description"keys under the "message" key. This will only occur with 400, 401, and 403.
-See the example below for an example of this.
+```
+
+  If the error is because of Authentication problems, the json responses will have an object with 
+  "code" and "description"keys under the "message" key. This will only occur with 400, 401, and 403.
+  See the example below for an example of this.
+
+```
 {
     "error": 401,
     "message": {
@@ -134,11 +143,11 @@ See the example below for an example of this.
     "success": false
 }
 ```
-# API Resource Endpoint Library
-```
-I will be using the hosted API URL for the examples, 
-but if running locally, you can switch out the hosted URL for http://127.0.0.1:5000
-```
+## API Resource Endpoint Library
+
+  I will be using the hosted API URL for the examples, 
+  but if running locally, you can switch out the hosted URL for http://127.0.0.1:5000
+
 ```
 All Endpoints
 GET '/'
