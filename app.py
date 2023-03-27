@@ -63,6 +63,20 @@ def create_app(test_config=None):
             traceback.print_exc()
             abort(500)
 
+    # Endpoint for viewing single actor by id.
+    @app.route('/actors/<int:id>', methods=['GET'])
+    @requires_auth('read:actors')
+    def single_actor_view(payload, id):
+        try:
+            actor = Actors.query.filter_by(id=id).one()
+            return jsonify({
+                "success": True,
+                "actor": actor.format()
+            })
+        except:
+            traceback.print_exc()
+            abort(500)
+
     # Endpoint for viewing movies.
     @app.route('/movies', methods=['GET'])
     @requires_auth('read:movies')
@@ -79,6 +93,20 @@ def create_app(test_config=None):
             return jsonify({
                 "success": True,
                 "movies": formatted_movies
+            })
+        except:
+            traceback.print_exc()
+            abort(500)
+
+    # Endpoint for viewing single movie by id.
+    @app.route('/movies/<int:id>', methods=['GET'])
+    @requires_auth('read:movies')
+    def single_movie_view(payload, id):
+        try:
+            movie = Movies.query.filter_by(id=id).one()
+            return jsonify({
+                "success": True,
+                "movie": movie.format()
             })
         except:
             traceback.print_exc()
@@ -175,11 +203,30 @@ def create_app(test_config=None):
             abort(422)
 
     # Endpoint for deleting actors
-    @app.route('/actors', methods=['DELETE'])
+    @app.route('/actors/delete', methods=['DELETE'])
     @requires_auth('delete:actors')
     def delete_actor(payload):
         try:
             actor_id = request.get_json().get("id", None)
+            Actors.query.filter_by(id=actor_id).delete()
+            db.session.commit()
+            return jsonify({
+                "success": True,
+                "deleted_actor_id": actor_id
+            })
+        except:
+            traceback.print_exc()
+            db.session.rollback()
+            abort(422)
+        finally:
+            db.session.close()
+
+    # Alternate endpoint for deleting actors
+    @app.route('/actors', methods=['DELETE'])
+    @requires_auth('delete:actors')
+    def axios_delete_actor(payload):
+        try:
+            actor_id = request.args.get('id')
             Actors.query.filter_by(id=actor_id).delete()
             db.session.commit()
             return jsonify({
@@ -194,11 +241,30 @@ def create_app(test_config=None):
             db.session.close()
 
     # Endpoint for deleting movies
-    @app.route('/movies', methods=['DELETE'])
+    @app.route('/movies/delete', methods=['DELETE'])
     @requires_auth('delete:movies')
     def delete_movie(payload):
         try:
             movie_id = request.get_json().get("id", None)
+            Movies.query.filter_by(id=movie_id).delete()
+            db.session.commit()
+            return jsonify({
+                "success": True,
+                "deleted_movie_id": movie_id
+            })
+        except:
+            traceback.print_exc()
+            db.session.rollback()
+            abort(422)
+        finally:
+            db.session.close()
+
+    # Alternate endpoint for deleting movies
+    @app.route('/movies', methods=['DELETE'])
+    @requires_auth('delete:movies')
+    def axios_delete_movie(payload):
+        try:
+            movie_id = request.args.get('id')
             Movies.query.filter_by(id=movie_id).delete()
             db.session.commit()
             return jsonify({

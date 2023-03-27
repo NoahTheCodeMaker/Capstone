@@ -136,8 +136,8 @@ POST '/actors'
 POST '/movies'
 PATCH '/actors'
 PATCH '/movies'
-DELETE '/actors'
-DELETE '/movies'
+DELETE '/actors/delete'
+DELETE '/movies/delete'
 
 Endpoint Descriptions in order of list above
 GET '/'
@@ -310,7 +310,7 @@ Also expects the following arguments in the body "id" containing the id of the m
     "success": true
 }
 
-DELETE '/actors'
+DELETE '/actors/delete'
 - Deletes the actor using the id
 - Request Arguments: Expects a bearer token in header under key 'Authorization' with the delete actors permission as well as the data header 'Content-Type: application/json'.
 Also expects the "id" argument in the body containing the id of the actor to delete
@@ -322,7 +322,7 @@ Also expects the "id" argument in the body containing the id of the actor to del
     "success":true
 }
 
-DELETE '/movies'
+DELETE '/movies/delete'
 - Deletes the movie using the id
 - Request Arguments: Expects a bearer token in header under key 'Authorization' with the delete movies permission as well as the data header 'Content-Type: application/json'.
 Also expects the "id" argument in the body containing the id of the movie to delete
