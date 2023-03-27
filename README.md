@@ -2,10 +2,12 @@
 
 ## ^^ Which I passed with flying colors on my first attempt!
 
+# See my React Capstone Frontend at https://github.com/NoahTheCodeMaker/React-Frontend-Test where I created a frontend for this app in React.js
+
 ## Motivation for this project
 
   As I went with the standard Udacity outline for this project, you may think that I was not feeling very 
-  motivated for this project.I assure you that this is not the case! I started this Udacity nanodegree 
+  motivated for this project. I assure you that this is not the case! I started this Udacity nanodegree 
   program just before going back to school for my final semester to get my degree in Science, Technology, 
   and Mathematics with studies in Computer Science. Because of this, I fell behind in the course, and was 
   always bothered by the slow pace that I was going. As I now have my degree, I wanted to get this project 
@@ -16,7 +18,7 @@
 
 ## Dependencies
 
-  This API is run with Flask and Flask-SQLAlchemy. 
+  This API is run with Flask, Flask-CORS and Flask-SQLAlchemy. 
   It uses Postgresql and psycopg2 for the database and database interactions.
   The Authorization is handled by Auth0 and with the python-jose library for decoding JWTs
   This web app uses Gunicorn to run in production.
