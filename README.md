@@ -156,13 +156,17 @@ GET '/'
 GET '/login'
 GET '/auth'
 GET '/actors'
+GET '/actors/id'
 GET '/movies'
+GET '/movies/id'
 POST '/actors'
 POST '/movies'
 PATCH '/actors'
 PATCH '/movies'
 DELETE '/actors/delete'
+DELETE '/actors'
 DELETE '/movies/delete'
+DELETE '/movies'
 
 Endpoint Descriptions in order of list above
 GET '/'
@@ -242,6 +246,22 @@ GET '/actors'
     "success": true
 }
 
+GET '/actors/id'
+- Endpoint for looking up a single actor by id in the database
+- Request Arguments: Expects a bearer token in header under key 'Authorization' with the read actors permission, and the 'id' as an integer within the URL
+- Returns: An "actor" key with an actor object, and a "success" key with a boolean indicating success
+- Example Request: curl -H 'Authorization: Bearer {Token_ID_Here}' https://noahdragoonudacitycapstone.onrender.com/actors/1
+- Example Response:
+{
+    "actor": {
+      "age": 50,
+      "gender": "Male",
+      "id": 1,
+      "name": "Dwayne 'The Rock' Johnson"
+    },
+    "success": true
+}
+
 GET '/movies'
 - Endpoint for looking up all of the movies in the database.
 - Request Arguments: Expects a bearer token in header under key 'Authorization' with the read movies permission
@@ -266,6 +286,21 @@ GET '/movies'
             "title": "Grown Ups"
         }
     ],
+    "success": true
+}
+
+GET '/movies/id'
+- Endpoint for looking up a single movie by id in the database
+- Request Arguments: Expects a bearer token in header under key 'Authorization' with the read movies permission, and the 'id' as an integer within the URL
+- Returns: A "movie" key with a movie object, and a "success" key with a boolean indicating success
+- Example Request: curl -H 'Authorization: Bearer {Token_ID_Here}' https://noahdragoonudacitycapstone.onrender.com/movies/1
+- Example Response:
+{
+    "movie": {
+      "id": 1,
+      "release_date": "May 29th, 2015",
+      "title":"San Andreas"
+    },
     "success": true
 }
 
@@ -347,12 +382,34 @@ Also expects the "id" argument in the body containing the id of the actor to del
     "success":true
 }
 
+DELETE '/actors'
+- Deletes the actor using the id. This endpoint was created for the frontend to be able to use it with axios.
+- Request Arguments: Expects a bearer token in header under key 'Authorization' with the delete actors permission, and expects a query parameter 'id' with the id of the actor to be deleted.
+- Returns: The "deleted_actor_id" containing the id as an integer of the actor deleted, and a "success" key with a boolean indicating success
+- Example Request: curl -H 'Authorization: Bearer {Token_ID_Here}' -X DELETE https://noahdragoonudacitycapstone.onrender.com/actors?id=1
+- Example Response: 
+{
+    "deleted_actor_id":1,
+    "success":true
+}
+
 DELETE '/movies/delete'
 - Deletes the movie using the id
 - Request Arguments: Expects a bearer token in header under key 'Authorization' with the delete movies permission as well as the data header 'Content-Type: application/json'.
 Also expects the "id" argument in the body containing the id of the movie to delete
 - Returns: The "deleted_movie_id" containing the id as an integer of the movie deleted, and a "success" key with a boolean indicating success
 - Example Request: curl -d '{"id":1}' -H 'Authorization: Bearer {Token_ID_Here}' -H 'Content-Type: application/json' -X DELETE https://noahdragoonudacitycapstone.onrender.com/movies
+- Example Response: 
+{
+    "deleted_movie_id":1,
+    "success":true
+}
+
+DELETE '/movies'
+- Deletes the movie using the id. This endpoint was created for the frontend to be able to use it with axios.
+- Request Arguments: Expects a bearer token in header under key 'Authorization' with the delete movies permission, and expects a query parameter 'id' with the id of the movie to be deleted.
+- Returns: The "deleted_movie_id" containing the id as an integer of the movie deleted, and a "success" key with a boolean indicating success
+- Example Request: curl -H 'Authorization: Bearer {Token_ID_Here}' -X DELETE https://noahdragoonudacitycapstone.onrender.com/movies?id=1
 - Example Response: 
 {
     "deleted_movie_id":1,
